@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+
+  ptk_crm:
+    build:
+      context: .
+    container_name: ptk_crm
+    command: "poetry run flask run --cert=adhoc --host=0.0.0.0"
+    restart: always
+    environment:
+      FLASK_APP: main.py
+      FLASK_DEBUG: 0
+      APP_ENV: docker
+    ports:
+      - 8112:5000
+    volumes:
+      - .:/usr/src/app
+
+  pytest_ptk_crm:
+    build:
+      context: .
+    container_name: pytest_ptk_crm
+    command: "poetry run pytest"
+    environment:
+      FLASK_APP: main.py
+      FLASK_DEBUG: 1
+      APP_ENV: docker
+    volumes:
+      - .:/usr/src/app
+
+
+volumes:
+  data:
