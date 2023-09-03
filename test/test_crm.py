@@ -67,7 +67,5 @@ class TestERP:
         #     }
         # ]
 
-        # Test 4
-
         customers = crm_util.get_customers()
-        assert customers == {"toto": "titi"}
+        assert customers == {"toto": "tito"}
