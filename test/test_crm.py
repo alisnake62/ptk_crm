@@ -319,3 +319,48 @@ class TestERP:
         ]
 
         assert customers == expected_customers
+
+    def test_get_customer(self, mocker):
+
+        crm_util = CRMUtil()
+        crm_util.current_API = mocker.MagicMock()
+        crm_util.current_API.get_customer.return_value = fake_legacy_customer_7
+        crm_util.current_API.get_orders.return_value = fake_legacy_orders
+
+        customer = crm_util.get_customer(customer_id="7")
+
+        expected_customer =  {
+            "createdAt":"2023-08-29T17:41:41.077Z",
+            "name":"Eugene Pfannerstill",
+            "username":"Kyle_Sawayn66",
+            "firstName":"Dahlia",
+            "lastName":"Jaskolski",
+            "address":{
+                "postalCode":"51160",
+                "city":"Phoenix"
+            },
+            "profile":{
+                "firstName":"Vidal",
+                "lastName":"Kuhic"
+            },
+            "company":{
+                "companyName":"Harber - Steuber"
+            },
+            "id":"7",
+            "orders":[
+                {
+                    "createdAt":"2023-08-30T10:54:50.688Z",
+                    "id":"1",
+                    "customerId":"7"
+                },
+                {
+                    "createdAt":"2023-08-29T17:17:39.378Z",
+                    "id":"51",
+                    "customerId":"7"
+                }
+            ],
+            "products_ordered": 3,
+            "revenue": 2017.0
+        }
+
+        assert customer == expected_customer

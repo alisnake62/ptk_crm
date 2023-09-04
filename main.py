@@ -43,5 +43,23 @@ def get_customers():
 
     return wrap_result(request=request, result=customers)
 
+@app.route("/v1/customer/<customer_id>")
+def get_customer(customer_id):
+
+    try:
+        token = request.authorization.token
+        token_is_valid = token_util.check_token(token=token)
+
+        if not token_is_valid: raise Exception()
+    except:
+        return "incorrect API token", 403
+
+    customer = crm_util.get_customer(customer_id=customer_id)
+
+    if customer is None:
+        return "product not found", 404
+
+    return wrap_result(request=request, result=customer)
+
 if __name__ == "__main__":
     app.run(debug=dev_env, host = "0.0.0.0", ssl_context='adhoc')
