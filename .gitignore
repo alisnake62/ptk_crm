@@ -3,3 +3,4 @@ __pycache__
 env
 prod.sh
 token.json
+cache_legacy.json
