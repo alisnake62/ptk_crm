@@ -7,4 +7,5 @@ class CRMUtil:
     date_util = DateTimeUtil()
 
     def get_customers(self) -> list:
-        return {"toto": "titi"}
+
+        return self.current_API.get_customers()
