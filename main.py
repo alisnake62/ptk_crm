@@ -33,7 +33,13 @@ def get_customers():
     except:
         return "incorrect API token", 403
 
-    customers = crm_util.get_customers()
+    args = request.args
+    sorted_by = args.get("sorted_by")
+
+    if sorted_by not in ["product_volume", "revenue_volume", None]:
+        return "bad sorted_by argument", 400
+
+    customers = crm_util.get_customers(sorted_by=sorted_by)
 
     return wrap_result(request=request, result=customers)
 
