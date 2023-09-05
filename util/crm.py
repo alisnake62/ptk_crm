@@ -41,4 +41,6 @@ class CRMUtil:
 
         customer = self.current_API.get_customer(customer_id=customer_id)
         customer = self._complete_customer_object(customer=customer)
+
+        customer["toto"] = "titi"
         return customer
