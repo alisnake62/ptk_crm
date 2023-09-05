@@ -360,7 +360,8 @@ class TestERP:
                 }
             ],
             "products_ordered": 3,
-            "revenue": 2017.0
+            "revenue": 2017.0,
+            "toto": "titi"
         }
 
         assert customer == expected_customer
