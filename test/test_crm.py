@@ -363,4 +363,4 @@ class TestERP:
             "revenue": 2017.0
         }
 
-        assert customer == expected_customer
+        assert False
